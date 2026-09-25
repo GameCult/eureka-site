@@ -56,9 +56,11 @@ carries more operator intent, though the copy itself is a draft to workshop.
   (`F:\Projects\Aquarium\docs\epiphany-agent-sdf-visual-language.md`) using the
   Aquarium organ identity palettes as-is; the GameCult brand does not define
   those colours, so they are a declared exception. The page names the memory
-  organ **Life**, not "Mind Steward". As of 2026-09-25 the operator has ordered
-  the rename inside the Eureka skill repo, and it is in progress, not landed.
-  Renaming it in the global doctrine is a separate decision that has not been made.
+  organ **Life**, not "Mind Steward". The Eureka skill made the same rename on
+  2026-09-25 (GameCult/Eureka commit `bd8dc2e`; "Mind Steward" survives there
+  only in dated history). The same day, the skill also started sizing each cut
+  against Hands' context budget (commit `7e2f66a`). The wider agent doctrine
+  outside the skill has not been renamed; that is a separate decision.
 
 ---
 
