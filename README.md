@@ -129,7 +129,9 @@ The retro 3D adventure is what makes this page special. Sharing toys is what
 GameCult is for, so it's all MIT: take any of it.
 
 - **The PS1 kit** is [`prototype/ps1.js`](prototype/ps1.js), about 240 lines.
-  It has no knowledge of Eureka.
+  Only a little of it is specific to this page: the brand palette, and two
+  opt-in effects (`nodes` for the lattice probes and `cells` for the wall's
+  re-graded checks) that you can ignore or delete.
   - `ps1({ map, color, emissive, rim, alpha, ... })` returns one three.js
     material with vertex snapping, affine textures, per-vertex lighting, rim
     light, fog and PS1 half-transparency, each switched on by options.
@@ -145,7 +147,7 @@ GameCult is for, so it's all MIT: take any of it.
   panels is another 10 lines on top.
 - **The organs** in [`prototype/organs.js`](prototype/organs.js) are
   self-contained builders. Each one returns a `{ group, update(t, k) }` object
-  you can drop into any three.js scene.
+  you can drop into any three.js scene, as long as `ps1.js` comes with it.
 
 If you make something with them, we'd love to see it.
 
