@@ -1,0 +1,70 @@
+/* GameCult brand tokens (source: gamecult-site quartz.config.ts). Single dark theme by decision. */
+:root {
+  --ground: #07111a;
+  --panel: #16212c;
+  --text: #b7c7d9;
+  --heading: #eef5ff;
+  --accent: #ff8a2a;
+  --link: #59b7ff;
+  --title: 'Montserrat', sans-serif;
+  --prose: 'Ubuntu', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--text); }
+body { font: 300 1.125rem/1.65 var(--prose); overflow-x: hidden; }
+
+#scene {
+  position: fixed; inset: 0; width: 100vw; height: 100vh;
+  image-rendering: pixelated; z-index: 0; display: block;
+}
+main { position: relative; z-index: 1; }
+
+h1, h2 { font-family: var(--title); color: var(--heading); margin: 0 0 .5em; }
+h1 { font-weight: 100; font-size: clamp(3.5rem, 12vw, 9rem); letter-spacing: .04em; line-height: 1; }
+h2 { font-weight: 200; font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.15; }
+a { color: var(--link); }
+em { font-style: normal; color: var(--accent); }
+
+.label {
+  font: 400 .75rem/1 var(--mono); text-transform: uppercase; letter-spacing: .22em;
+  color: var(--accent); margin: 0 0 1.2em;
+}
+
+section { min-height: 100vh; display: flex; align-items: center; padding: 10vh 16px; }
+section.right { justify-content: flex-end; }
+.panel {
+  max-width: 34rem; padding: 1.75rem 2rem; margin: 0 max(0px, 6vw);
+  background: rgba(22, 33, 44, .86); border-left: 2px solid var(--accent);
+}
+.panel.bare { background: none; border: 0; }
+.hero .sub { font-family: var(--title); font-weight: 200; font-size: clamp(1.2rem, 2.6vw, 1.8rem); color: var(--heading); margin: 0; }
+.hero .panel, .hero .sub { text-shadow: 0 0 12px var(--ground), 0 0 3px var(--ground); }
+
+.line {
+  font: 200 clamp(1.8rem, 5vw, 3.8rem)/1.15 var(--title); color: var(--heading);
+  margin: 0 0 .6em; max-width: 22ch;
+  text-shadow: 0 0 18px var(--ground), 0 0 4px var(--ground);
+}
+.staccato .stage { width: 100%; padding: 0 max(0px, 6vw); }
+
+/* With motion: the section becomes a scroll track, the stage pins, lines take turns. */
+.motion .staccato { display: block; padding: 0; height: calc(var(--n) * 70vh + 100vh); }
+.motion .staccato .stage { position: sticky; top: 0; height: 100vh; display: grid; align-items: center; }
+.motion .staccato .line { grid-area: 1 / 1; margin: 0; opacity: 0; will-change: transform, opacity; }
+
+#probe {
+  position: fixed; right: 8px; bottom: 8px; z-index: 5; white-space: pre;
+  font: 400 11px/1.4 var(--mono); color: var(--heading); background: rgba(7,17,26,.85);
+  padding: 6px 8px; border: 1px solid var(--panel);
+}
+
+@media (max-width: 640px) {
+  .panel { padding: 1.25rem 1.25rem; margin: 0; }
+}
+
+code { font: 400 .92em var(--mono); color: var(--heading); }
+pre { margin: 0 0 1em; padding: .8rem 1rem; background: var(--ground); border: 1px solid #22303e; overflow-x: auto; }
+pre code { font-size: .8rem; white-space: pre; }
+.fine { font-size: .92rem; opacity: .85; }

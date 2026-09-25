@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eureka</title>
+<meta name="description" content="Eureka: the agent that writes the code does not get to certify that the code works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Montserrat:wght@100;200&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+  // Motion is an enhancement: without JS, or with reduced motion, the page is plain prose.
+  document.documentElement.classList.add('js');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
+</script>
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.js" } }</script>
+</head>
+<body>
+<canvas id="scene" aria-hidden="true"></canvas>
+
+<main>
+  <!-- Each section pins one camera stop (data-stop, matching world.js ROUTE ids, in order). Copy is a draft. -->
+
+  <!-- The hall -->
+  <section class="hero" data-stop="hero">
+    <div class="panel bare">
+      <p class="label">GameCult / Eureka</p>
+      <h1>Eureka</h1>
+      <p class="sub">Your coding agent passed its own tests.</p>
+    </div>
+  </section>
+
+  <section class="staccato" data-stop="reassuring" style="--n:5">
+    <div class="stage">
+      <p class="line">How reassuring.</p>
+      <p class="line">One agent maps the change.</p>
+      <p class="line">One implements it.</p>
+      <p class="line">Another arrives afterward and tries to prove it wrong.</p>
+      <p class="line">The last one is called <em>Soul</em>.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="green">
+    <div class="panel">
+      <p class="label">Green is a color</p>
+      <h2>Coherence is not correctness.</h2>
+      <p>An agent that plans a change, implements it, writes the tests, runs them and reports success has produced a very coherent account of events. The tests pin its own reading of the task. The report is written by the party with the most reason to believe it.</p>
+    </div>
+  </section>
+
+  <!-- The shaft -->
+  <section class="prose right" data-stop="epiphany">
+    <div class="panel">
+      <p class="label">First there was Epiphany</p>
+      <h2>Local productivity outran global understanding.</h2>
+      <p>Coding agents are fast enough to make a locally sensible change, then another, then another, while the architecture quietly stops making sense. Tests pass. Tasks close. Everyone has receipts.</p>
+      <p>GameCult started building Epiphany: a Mind for a project that survives the workers thinking about it. She is still under construction. She is very particular about her body.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="sister">
+    <div class="panel">
+      <p class="label">Eureka is her sister</p>
+      <h2>We still had software to ship.</h2>
+      <p>So the process Epiphany embodies became practice first: separate understanding from execution, write the promises down, keep the evidence, and send in somebody who did not write the thing. Then an agent was asked to formalise it and run it against a real migration.</p>
+      <p>The migration did not invent the method. It was the first time the method had to explain itself.</p>
+    </div>
+  </section>
+
+  <!-- Eureka's organ chamber -->
+  <section class="prose right" data-stop="faculties">
+    <div class="panel">
+      <p class="label">Nothing grades itself</p>
+      <h2>Five organs. One operator.</h2>
+      <p>Eureka splits a change across faculties inherited from Epiphany's anatomy. Each one owns a single job, and none of them certifies its own work.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="imagination">
+    <div class="panel">
+      <p class="label">Imagination</p>
+      <h2>Maps the change before anyone touches it.</h2>
+      <p>Behavioural promises, ownership boundaries, deletions, verification obligations, and the decisions that actually need a human. The point is not a large specification. The point is to make it hard for implementation to quietly redefine the task.</p>
+    </div>
+  </section>
+
+  <section class="prose right" data-stop="hands">
+    <div class="panel">
+      <p class="label">Hands</p>
+      <h2>One bounded cut at a time.</h2>
+      <p>Hands follows the map and does not edit it afterward so the route taken becomes the route intended. The good ones stop at forks: one refused to break 104 scene references; another reported that its own mutation passed because the test read expected values from the code under test.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="soul">
+    <div class="panel">
+      <p class="label">Soul</p>
+      <h2>Assumes something is wrong.</h2>
+      <p>Soul does not trust the implementation report, or green tests because they are green. It builds its own probes, attacks the promises, and mutates the code to see whether the evidence can tell right from plausibly wrong. Its job is to make the code regret making promises.</p>
+    </div>
+  </section>
+
+  <section class="prose right" data-stop="self">
+    <div class="panel">
+      <p class="label">Self</p>
+      <h2>Routes the work. Is not infallible.</h2>
+      <p>Self coordinates the campaign and brings real product decisions back to the operator. Not every ambiguity deserves autonomy. Not every inconvenience deserves a meeting. Separating the faculties catches the implementer; it does not make the coordinator right, and the operator corrects it.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="life">
+    <div class="panel">
+      <p class="label">Life</p>
+      <h2>Carries the thread.</h2>
+      <p>Continuity through compaction, sleep and restart. Life keeps durable state honest at every phase boundary, because memory that quietly rewrites itself is a feature right up until it matters.</p>
+    </div>
+  </section>
+
+  <section class="prose right" data-stop="operator">
+    <div class="panel">
+      <p class="label">The operator</p>
+      <h2>The sixth seat is yours.</h2>
+      <p>Where Epiphany keeps her Face, Eureka keeps a human. The operator owns the decisions that are actually decisions. Machines are very capable. That does not make responsibility disappear.</p>
+    </div>
+  </section>
+
+  <!-- The lattice -->
+  <section class="prose" data-stop="prompts">
+    <div class="panel">
+      <p class="label">Better prompts are lovely</p>
+      <h2>The same reasoning writes the code and the tests.</h2>
+      <p>The interpretation that produced the implementation tends to produce the tests that approve it. Asking the same system to look harder helps. Giving another system the explicit job of proving it wrong helps more.</p>
+    </div>
+  </section>
+
+  <section class="staccato" data-stop="mutation" style="--n:6">
+    <div class="stage">
+      <p class="line">Mutation testing is rude.</p>
+      <p class="line">Clamp something that should pass through.</p>
+      <p class="line">Drop a write.</p>
+      <p class="line">Invert an authority check.</p>
+      <p class="line">If the tests stay green, the tests have learned something about themselves.</p>
+      <p class="line">Incorrect software is under no obligation to look suspicious.</p>
+    </div>
+  </section>
+
+  <!-- The specimen gallery -->
+  <section class="prose right" data-stop="campaign">
+    <div class="panel">
+      <p class="label">The first formal campaign</p>
+      <h2>29 of 32 falsification passes found real defects.</h2>
+      <p>About 75 in all, every one behind the implementer's green suite. One supposedly untestable rule took fifteen lines and a millisecond to falsify. One document was accepted while being 86,751 bytes too large for the transport required to return it.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="case-drop">
+    <div class="panel">
+      <p class="label">Specimen 01 / CultLib QUIC transport</p>
+      <h2>Every overlay would have dropped ten seconds after connecting.</h2>
+      <p>A handler swap meant the provider never recorded CONNECTED, so its handshake timer evicted healthy peers. No test lived past ten seconds.</p>
+    </div>
+  </section>
+
+  <section class="prose right" data-stop="case-uaf">
+    <div class="panel">
+      <p class="label">Specimen 02 / native binding</p>
+      <h2>A use-after-free in <code>release()</code>.</h2>
+      <p>It only showed under thread-pool saturation, where Soul reproduced it as a core dump. It is now pinned by a regression test that crashes with the old order.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="case-leak">
+    <div class="panel">
+      <p class="label">Specimen 03 / native binding</p>
+      <h2>About 53 bytes leaked per native call.</h2>
+      <p>Roughly 36 MB a day while idle, gigabytes under load, and a perfectly flat JavaScript heap the whole time. Every check that looked at the heap was telling the truth about the wrong thing.</p>
+    </div>
+  </section>
+
+  <section class="prose right" data-stop="case-int">
+    <div class="panel">
+      <p class="label">Specimen 04 / StreamPixels</p>
+      <h2>Every subathon event after the first would have failed.</h2>
+      <p>A fractional value was written to an integer column. The tests used whole-second fake timers, so the fraction never existed there.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="case-exec">
+    <div class="panel">
+      <p class="label">Specimen 05 / a test double</p>
+      <h2>The fake was kinder than the real thing.</h2>
+      <p>The fake executor gave every beat its own completion callback. The real one had a single shared slot. A late finish released the next beat early, and animations overlapped.</p>
+    </div>
+  </section>
+
+  <section class="staccato" data-stop="pattern" style="--n:3">
+    <div class="stage">
+      <p class="line">It did not stop happening.</p>
+      <p class="line">The defects change.</p>
+      <p class="line">The pattern does not.</p>
+    </div>
+  </section>
+
+  <!-- The archive -->
+  <section class="prose right" data-stop="bodycount">
+    <div class="panel">
+      <p class="label">Every rule has a body count</p>
+      <h2>The rules are accumulated damage.</h2>
+      <p>Do not let implementation edit its own map. Measure real transport boundaries. Do not call a behaviour untestable because the first agent lacked imagination. Each rule exists because a reasonable alternative failed, and the changelog keeps the evidence. The scars stay.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="expense">
+    <div class="panel">
+      <p class="label">Expense</p>
+      <h2>Several agents cost more than one.</h2>
+      <p>They repeat work, and Soul builds probes whose main purpose is proving Hands wrong. That spend is the work. Self's job is to aim it: one Soul gate per cut, and cuts small enough that Hands never drowns in its own context. We remain devastated by the expense of finding bugs before shipping them.</p>
+    </div>
+  </section>
+
+  <!-- Epiphany's chamber -->
+  <section class="prose right" data-stop="sisters">
+    <div class="panel">
+      <p class="label">Epiphany and Eureka</p>
+      <h2>Same organs. Different bodies.</h2>
+      <p>Epiphany is the organism: eight organs, shared governed state, durable memory, and coordination without a human typing <code>Continue</code> all day. She is still growing bones. Eureka is the field kit built while we wait. The two are developing side by side on one shared substrate.</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="open">
+    <div class="panel">
+      <p class="label">Open by design</p>
+      <h2>Use it. Fork it. Read every rule.</h2>
+      <p>If your campaign finds a failure mode we have not seen, that is more interesting. The plan is for Eureka to offer a sanitised evidence contribution after a campaign: the operator sees the payload and decides whether it leaves. No background telemetry. Consent keeps working even when the data would be useful.</p>
+    </div>
+  </section>
+
+  <!-- Back in the hall -->
+  <section class="prose right" data-stop="home">
+    <div class="panel">
+      <p class="label">Install</p>
+      <h2>Point it at something unpleasant.</h2>
+      <pre><code>git clone https://github.com/GameCult/Eureka.git ~/.claude/skills/eureka</code></pre>
+      <p>Claude Code finds the skill from its <code>SKILL.md</code>. The source is <a href="https://github.com/GameCult/Eureka">GameCult/Eureka</a>. For the larger machine she came from, see <a href="https://github.com/GameCult/Epiphany">GameCult/Epiphany</a>, and bring patience.</p>
+      <p class="fine">GameCult builds open infrastructure for coordinated work between people, projects and agents. The workflow is free. Learning every lesson personally remains available at market rates.</p>
+    </div>
+  </section>
+</main>
+
+<div id="probe" hidden></div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
