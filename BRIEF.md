@@ -11,7 +11,7 @@ carries more operator intent, though the copy itself is a draft to workshop.
 
 ## Operator rulings (2026-09-25). These settle the open questions below.
 
-- **Standalone site, in this folder: `F:\Projects\eureka-site`.** It will be the
+- **Standalone site, in this repo.** It will be the
   **public** repo `GameCult/eureka-site`, served at **eureka.gamecult.org**, a
   **GitHub Pages static site**, in the GameCult brand. (This originally said
   "built with GameCult's Quartz setup"; the Quartz part was superseded later the
@@ -27,7 +27,7 @@ carries more operator intent, though the copy itself is a draft to workshop.
   Soul, Mind Steward); Epiphany keeps findings in typed state, Eureka in
   committed docs and agent reports (see `SKILL.md`'s opening and
   `references/epiphany-comparison-2026-09-15.md`). Read Epiphany itself,
-  `F:\Projects\Epiphany` (README, `docs/`), before shaping that section.
+  the Epiphany repo (README, `docs/`), before shaping that section.
 - Naming GameCult projects (CultLib, StreamPixels, Epiphany) is fine. Still never
   name the streamer or any private individual.
 - **Cost framing supersedes "What NOT to claim" below.** The ~60% of a weekly
@@ -47,20 +47,23 @@ carries more operator intent, though the copy itself is a draft to workshop.
   prototype lives in `prototype/` and is served at
   https://yggdrasil.gamecult.org/eureka/ as a stopgap until eureka.gamecult.org
   exists on Pages; deploy per
-  `F:\Projects\gamecult-ops\runbooks\eureka-prototype-yggdrasil.md`. Approved
+  GameCult's ops runbook for the Eureka prototype. Approved
   route, in order: hall/monument; hatch + shaft; Eureka organ chamber; lattice
   (Soul's probes, mutation testing); specimen gallery (one real defect per
   case); archive (rules/evidence); Epiphany's chamber (all eight organs in
   scaffolding: the sister reveal); return to the hall with the monument split
   open, plus install. Organs are PS1 demakes of their Aquarium renditions
-  (`F:\Projects\Aquarium\docs\epiphany-agent-sdf-visual-language.md`) using the
+  (Aquarium's `docs/epiphany-agent-sdf-visual-language.md`) using the
   Aquarium organ identity palettes as-is; the GameCult brand does not define
   those colours, so they are a declared exception. The page names the memory
   organ **Life**, not "Mind Steward". The Eureka skill made the same rename on
   2026-09-25 (GameCult/Eureka commit `bd8dc2e`; "Mind Steward" survives there
   only in dated history). The same day, the skill also started sizing each cut
-  against Hands' context budget (commit `7e2f66a`). The wider agent doctrine
-  outside the skill has not been renamed; that is a separate decision.
+  against Hands' context budget (commit `7e2f66a`). The operator's wider agent
+  doctrine adopted the name Life the same day. Life's scope stays narrow (keeping
+  memory honest) until a typed memory service owns each agent's mind. Then it
+  takes on continuity, pressure and resuming after interruption, as it already
+  does in Epiphany. Epiphany's own naming is Epiphany's to change.
 
 ---
 
