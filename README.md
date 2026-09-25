@@ -123,6 +123,32 @@ faint presence. The iris opens as you read.
   was checked with headless Chrome driven by puppeteer instead, using the
   `?debug` readout and the `?wp=N` jump.
 
+## Take the toys
+
+The retro 3D adventure is what makes this page special. Sharing toys is what
+GameCult is for, so it's all MIT: take any of it.
+
+- **The PS1 kit** is [`prototype/ps1.js`](prototype/ps1.js), about 240 lines.
+  It has no knowledge of Eureka.
+  - `ps1({ map, color, emissive, rim, alpha, ... })` returns one three.js
+    material with vertex snapping, affine textures, per-vertex lighting, rim
+    light, fog and PS1 half-transparency, each switched on by options.
+  - `framebuffer(renderer)` gives you the low-resolution target and the 15-bit
+    dither pass.
+  - There are helpers for canvas textures, tiled floors that keep the texture
+    warp in check, and merging many parts into one draw call.
+  - Copy it next to three.js, point your meshes at `ps1()`, and your scene is
+    now 1997.
+- **The scroll-on-rails pattern** is about 40 lines of `main.js`: turn scroll
+  position into a path parameter by interpolating between section anchors, then
+  let everything else read that one number. The framing shift away from text
+  panels is another 10 lines on top.
+- **The organs** in [`prototype/organs.js`](prototype/organs.js) are
+  self-contained builders. Each one returns a `{ group, update(t, k) }` object
+  you can drop into any three.js scene.
+
+If you make something with them, we'd love to see it.
+
 ## Where things live
 
 | File | Owns |

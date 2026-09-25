@@ -15,11 +15,11 @@ carries more operator intent, though the copy itself is a draft to workshop.
   **public** repo `GameCult/eureka-site`, served at **eureka.gamecult.org**, a
   **GitHub Pages static site**, in the GameCult brand. (This originally said
   "built with GameCult's Quartz setup"; the Quartz part was superseded later the
-  same day. See the last ruling below.) The repo, the Quartz scaffold and
-  the Pages deploy are yours to set up. As of 2026-09-25 none of it exists: no
-  local git repo, and `GameCult/eureka-site` does not resolve on GitHub. Per
-  `F:\Projects\CLAUDE.md`, create it under the `GameCult` org. (An earlier draft
-  of this section said `epiphany-site`; that was a mistype.)
+  same day. See the last ruling below.) The public repo
+  https://github.com/GameCult/eureka-site was created on 2026-09-25, with `main`
+  tracking origin. The GitHub Pages deploy and the eureka.gamecult.org domain
+  are **not set up yet**. (An earlier draft of this section said
+  `epiphany-site`; that was a mistype.)
 - **The site is Eureka's, not Epiphany's.** The lineage still matters (*"the
   lineage is the whole story"*), but **Eureka is Epiphany's sister, not her
   descendant**: two Personas developing side by side on a shared substrate (the
@@ -56,8 +56,9 @@ carries more operator intent, though the copy itself is a draft to workshop.
   (`F:\Projects\Aquarium\docs\epiphany-agent-sdf-visual-language.md`) using the
   Aquarium organ identity palettes as-is; the GameCult brand does not define
   those colours, so they are a declared exception. The page names the memory
-  organ **Life**, not "Mind Steward". Renaming it in the Eureka skill or global
-  doctrine is a pending, operator-owned direction, not done.
+  organ **Life**, not "Mind Steward". As of 2026-09-25 the operator has ordered
+  the rename inside the Eureka skill repo, and it is in progress, not landed.
+  Renaming it in the global doctrine is a separate decision that has not been made.
 
 ---
 
