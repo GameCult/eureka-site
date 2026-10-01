@@ -79,10 +79,10 @@ const up = (v, d = 0.3) => v.clone().setY(v.y + d);
 
 export const ROUTE = [
   { id: 'hero',          p: V(5.5, 4, 13),             l: V(-2.8, 2.5, 0) },
-  { id: 'reassuring',    p: V(3.2, 2.4, 8.8),          l: V(0, 0.6, 4) },
-  { id: 'green',         p: V(-0.4, 4.2, 4.9),         l: V(-0.4, -6, 3.7) },
-  { id: 'epiphany',      p: V(-0.4, -3, 4.1),          l: V(-0.3, -13, 3.4) },
-  { id: 'sister',        p: V(-0.4, -9, 4.0),          l: V(-0.2, -18, 3.0) },
+  { id: 'lines',         p: V(3.2, 2.4, 8.8),          l: V(0, 0.6, 4) },
+  { id: 'slop',          p: V(-0.4, 4.2, 4.9),         l: V(-0.4, -6, 3.7) },
+  { id: 'commons',       p: V(-0.4, -3, 4.1),          l: V(-0.3, -13, 3.4) },
+  { id: 'method',        p: V(-0.4, -9, 4.0),          l: V(-0.2, -18, 3.0) },
   { id: 'faculties',     p: V(-0.3, -12.4, 4.4),       l: V(0, -17.5, -4) },
   {                      p: orbit(OC, 200, 8.2, -15.5), l: V(-2, -16.8, -6) },
   { id: 'imagination',   p: orbit(OC, 135, 7.8, -15.8), l: up(org.imagination) },
@@ -94,21 +94,21 @@ export const ROUTE = [
   {                      p: orbit(OC, 15, 8.6, -15),    l: OC.clone() },
   { id: 'operator',      p: V(2.2, -14.3, 5.5),        l: V(0, -16.6, -5) },
   {                      p: V(9.5, -15, -13),          l: V(3, -26, -22) },
-  { id: 'prompts',       p: V(5, -24, -17),            l: V(0, -29, -26) },
+  { id: 'mind',          p: V(5, -24, -17),            l: V(0, -29, -26) },
   { id: 'mutation',      p: V(-4, -29.5, -23.5),       l: V(1, -32, -31) },
   {                      p: V(0, -35, -33),            l: V(-4, -37, -44) },
-  { id: 'campaign',      p: V(3, -37, -45),            l: V(-3.4, -37.4, -45) },
-  { id: 'case-drop',     p: V(9.4, -37.6, -44.2),      l: V(9, -38.3, -48.4) },
-  { id: 'case-uaf',      p: V(15.4, -37.6, -45.8),     l: V(15, -38.3, -41.6) },
-  { id: 'case-leak',     p: V(21.4, -37.6, -44.2),     l: V(21, -38.3, -48.4) },
-  { id: 'case-int',      p: V(27.4, -37.6, -45.8),     l: V(27, -38.3, -41.6) },
-  { id: 'case-exec',     p: V(33.4, -37.6, -44.2),     l: V(33, -38.3, -48.4) },
+  { id: 'falsegreens',   p: V(3, -37, -45),            l: V(-3.4, -37.4, -45) },
+  {                      p: V(9.4, -37.6, -44.2),      l: V(9, -38.3, -48.4) },
+  {                      p: V(15.4, -37.6, -45.8),     l: V(15, -38.3, -41.6) },
+  {                      p: V(21.4, -37.6, -44.2),     l: V(21, -38.3, -48.4) },
+  {                      p: V(27.4, -37.6, -45.8),     l: V(27, -38.3, -41.6) },
+  {                      p: V(33.4, -37.6, -44.2),     l: V(33, -38.3, -48.4) },
   { id: 'pattern',       p: V(37, -37, -45),           l: V(41, -37.5, -38) },
-  { id: 'bodycount',     p: V(41, -37.2, -34),         l: V(38.5, -37.5, -28) },
-  { id: 'expense',       p: V(41, -36.8, -22),         l: V(44, -37, -16) },
+  { id: 'scars',         p: V(41, -37.2, -34),         l: V(38.5, -37.5, -28) },
+  { id: 'cost',          p: V(41, -36.8, -22),         l: V(44, -37, -16) },
   {                      p: V(41, -38.5, -6),          l: V(26, -48, 2) },
-  { id: 'sisters',       p: V(32.5, -45, 8),           l: V(20, -49, 3) },
-  { id: 'open',          p: V(12, -45.5, 14.5),        l: V(21, -49, 2) },
+  { id: 'inprogress',    p: V(32.5, -45, 8),           l: V(20, -49, 3) },
+  { id: 'forge',         p: V(12, -45.5, 14.5),        l: V(21, -49, 2) },
   {                      p: V(19.6, -43.5, 4.4),       l: V(20, -20, 3.8) },
   {                      p: V(20.2, -12, 4.1),         l: V(20.2, 10, 3.8) },
   {                      p: V(20.3, 1.5, 4.2),         l: V(12, 2.5, 1) },
@@ -244,7 +244,7 @@ export function buildWorld() {
       return { m, tip, len: 8 + r() * 7 };
     });
     anims.push((t, ctx) => {
-      const k = THREE.MathUtils.clamp((ctx.u - U.prompts) / (U.mutation - U.prompts), 0, 1);
+      const k = THREE.MathUtils.clamp((ctx.u - U.mind) / (U.mutation - U.mind), 0, 1);
       probes.forEach(p => {
         p.m.scale.y = Math.max(0.001, k * p.len);
         p.tip.position.set(p.m.position.x, p.m.position.y - k * p.len, p.m.position.z); p.tip.rotation.y = t;
@@ -263,7 +263,7 @@ export function buildWorld() {
   wallG(44, 16, -50, 0);
   wallG(32, 22, -40, Math.PI); // the south wall leaves an opening where the camera drops in from the lattice
   {
-    // The first campaign's cabinet: twelve pinned mutants, one still moving.
+    // A cabinet of pinned mutants, one still moving.
     const cab = new THREE.Group(); cab.position.set(-3.4, -37.4, -45); cab.rotation.y = Math.PI / 2; cab.scale.setScalar(0.52); scene.add(cab);
     const frame = new THREE.Mesh(new THREE.BoxGeometry(7.4, 9.4, 0.6, 3, 4, 1), ps1({ map: T.cabinet })); frame.position.z = -0.4; cab.add(frame);
     const bug = bugTex(1, '#5d6b78', '#8795a3'), bugMat = ps1({ map: bug, alphaTest: true, emissive: true, color: 0xcfd8e2 });
@@ -281,23 +281,27 @@ export function buildWorld() {
   }
   const glass = ps1({ color: 0x9fc4e8, rim: 0xbfe3ff, alpha: 0.22, side: THREE.DoubleSide });
   const brass = ps1({ color: 0xb08a4a, emissive: true });
+  // One illustration: the mutation runner's four false greens (Eureka tools/, 2026-10-01), and an empty case.
   const CASES = [
-    ['case-drop', 9, 'north', 11, '#6a5a78', '#a795c3', 'No.01 HANDSHAKE EVICTION', 'SUITE GREEN  SOUL CAUGHT'],
-    ['case-uaf', 15, 'south', 12, '#78604a', '#c3a587', 'No.02 USE AFTER FREE', 'SUITE GREEN  SOUL CAUGHT'],
-    ['case-leak', 21, 'north', 13, '#4a7868', '#87c3ad', 'No.03 53 BYTES A CALL', 'SUITE GREEN  SOUL CAUGHT'],
-    ['case-int', 27, 'south', 14, '#78784a', '#c3c387', 'No.04 FRACTION IN INT', 'SUITE GREEN  SOUL CAUGHT'],
-    ['case-exec', 33, 'north', 15, '#4a5a78', '#8799c3', 'No.05 SHARED SLOT', 'SUITE GREEN  SOUL CAUGHT'],
+    [9, 'north', 11, '#6a5a78', '#a795c3', 'No.01 BUILD TYPO', 'READ GREEN  SOUL CAUGHT'],
+    [15, 'south', 12, '#78604a', '#c3a587', 'No.02 FORGED KILL', 'READ GREEN  SOUL CAUGHT'],
+    [21, 'north', 13, '#4a7868', '#87c3ad', 'No.03 LEFTOVER FILE', 'READ GREEN  SOUL CAUGHT'],
+    [27, 'south', 14, '#78784a', '#c3c387', 'No.04 RUNS ONCE', 'READ GREEN  SOUL CAUGHT'],
+    [33, 'north', 0, null, null, 'No.05', 'EMPTY'],
   ];
-  for (const [id, x, side, seed, body, leg, l1, l2] of CASES) {
+  for (const [x, side, seed, body, leg, l1, l2] of CASES) {
     const g = new THREE.Group(); g.position.set(x, -40, side === 'north' ? -48.4 : -41.6); g.rotation.y = side === 'north' ? 0 : Math.PI; scene.add(g);
     const ped = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.0, 1.6), stone); ped.position.y = 0.5; g.add(ped);
     const box = new THREE.BoxGeometry(1.5, 1.6, 1.5);
     const gl = new THREE.Mesh(box, glass); gl.position.y = 1.8; g.add(gl);
     const fr = new THREE.LineSegments(new THREE.EdgesGeometry(box), brass); fr.position.y = 1.8; g.add(fr);
-    const spec = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.2), ps1({ map: bugTex(seed, body, leg), alphaTest: true, emissive: true, color: 0xdde6ee }));
-    spec.position.y = 1.8; g.add(spec);
+    if (body) {
+      const spec = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.2), ps1({ map: bugTex(seed, body, leg), alphaTest: true, emissive: true, color: 0xdde6ee }));
+      spec.position.y = 1.8; g.add(spec);
+      const phase = x;
+      anims.push((t) => { spec.rotation.y = Math.sin(t * 0.7 + phase) * 0.25; });
+    }
     const lab = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 0.26), ps1({ map: labelTex(l1, l2), emissive: true })); lab.position.set(0, 0.7, 0.81); g.add(lab);
-    anims.push((t, ctx) => { spec.rotation.y = Math.sin(t * 0.7) * 0.25 * ctx.near(id); });
   }
 
   // ---------- the archive: rules as tablets, each with a body count ----------

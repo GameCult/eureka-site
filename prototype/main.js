@@ -130,9 +130,9 @@ function frame(now) {
   shared.uLightDir.value.copy(LIGHT).transformDirection(camera.matrixWorldInverse);
 
   ctx.u = u;
-  ctx.end = clamp01((u - W.open) / (W.home - W.open));
+  ctx.end = clamp01((u - W.forge) / (W.home - W.forge));
   shared.uEnd.value = ctx.end;
-  shared.uProbe.value = clamp01((u - W.prompts) / (W.mutation - W.prompts));
+  shared.uProbe.value = clamp01((u - W.mind) / (W.mutation - W.mind));
   for (const a of world.anims) a(t, ctx);
   world.skyUpdate(t, u, camera.position.y);
 
