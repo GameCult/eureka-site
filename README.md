@@ -1,12 +1,11 @@
 # How we built a PS1 dungeon to sell a code-review workflow
 
-[Eureka](https://github.com/GameCult/Eureka) is a Claude Code skill built on
+[Eureka](https://eureka.gamecult.org/forge/GameCult/Eureka) is a Claude Code skill built on
 one rule: the agent that writes the code does not get to certify that the code
 works. It needed a landing page. This repo is that page, and it turned into a
 PlayStation 1 game you scroll through.
 
-Preview: **https://yggdrasil.gamecult.org/eureka/** until it moves to
-`eureka.gamecult.org`.
+Served at **https://eureka.gamecult.org/**.
 
 ## Two briefs, neither in charge
 
@@ -40,7 +39,7 @@ hatch, the route runs:
 
 1. Down a shaft into Eureka's organ chamber.
 2. Through a lattice where Soul's probes flip green nodes to orange.
-3. Along a gallery of specimen cases, one per real defect.
+3. Along a gallery of specimen cases: the mutation runner's four false greens, and one empty case.
 4. Past an archive where the rules keep their evidence.
 5. Into Epiphany's chamber.
 6. Up a second shaft into the hall, where the monument has now split along its
@@ -170,4 +169,4 @@ python -m http.server 8765 --directory prototype
 ```
 
 The Yggdrasil deploy is documented in `gamecult-ops`, in
-`runbooks/eureka-prototype-yggdrasil.md`. The copy is still a draft.
+`runbooks/eureka-prototype-yggdrasil.md`.
