@@ -35,7 +35,7 @@ em { font-style: normal; color: var(--accent); }
 section { min-height: 100vh; display: flex; align-items: center; padding: 10vh 16px; }
 section.right { justify-content: flex-end; }
 .panel {
-  max-width: 34rem; padding: 1.75rem 2rem; margin: 0 max(0px, 6vw);
+  max-width: min(34rem, 100%); padding: 1.75rem 2rem; margin: 0 max(0px, 6vw);
   background: rgba(22, 33, 44, .86); border-left: 2px solid var(--accent);
 }
 .panel.bare { background: none; border: 0; }
