@@ -1,6 +1,6 @@
 // The world the camera flies through, and the path it flies along.
 // Route: hall -> hatch + shaft -> Eureka's organ chamber -> lattice -> specimen gallery
-//        -> archive -> Epiphany's chamber -> second shaft -> back to the hall.
+//        -> archive -> the vanishing twin's chamber -> second shaft -> back to the hall.
 import * as THREE from 'three';
 import { C, ps1, rng, canvas, texOf, tex, noise, flat, tiles, merge, mat4, lineGeo, circlePts } from './ps1.js';
 import * as O from './organs.js';
@@ -71,10 +71,10 @@ function labelTex(a, b) {
 
 // ---------- the route: stops pin page sections; vias shape the flight between them ----------
 const OC = V(0, -17, -5);  // Eureka's organ chamber, Self at the centre
-const EC = V(20, -49, 4);  // Epiphany's chamber
+const EC = V(20, -49, 4);  // the vanishing twin: Epiphany's chamber
 const R_EUREKA = 6, R_EPIPHANY = 9, ORGAN_Y = -16.8;
 const orbit = (c, deg, r, y) => { const a = deg * Math.PI / 180; return V(c.x + Math.cos(a) * r, y, c.z - Math.sin(a) * r); };
-const org = Object.fromEntries(['imagination', 'hands', 'soul', 'life'].map(id => [id, O.slot(OC, id, R_EUREKA).setY(ORGAN_Y)]));
+const org = Object.fromEntries(['imagination', 'hands', 'soul', 'life', 'eyes'].map(id => [id, O.slot(OC, id, R_EUREKA).setY(ORGAN_Y)]));
 const up = (v, d = 0.3) => v.clone().setY(v.y + d);
 
 export const ROUTE = [
@@ -90,8 +90,8 @@ export const ROUTE = [
   { id: 'hands',         p: orbit(OC, 250, 7.5, -15.6), l: org.hands },
   { id: 'soul',          p: orbit(OC, 330, 7.5, -15.6), l: org.soul },
   { id: 'self',          p: orbit(OC, 20, 3.3, -14.6),  l: up(OC, 0.2) },
-  { id: 'life',          p: orbit(OC, 80, 7, -15.8),    l: org.life },
-  {                      p: orbit(OC, 15, 8.6, -15),    l: OC.clone() },
+  { id: 'life',          p: orbit(OC, 98, 7.2, -15.6),  l: org.life },
+  { id: 'eyes',          p: orbit(OC, 46, 10.2, -15.4), l: up(org.eyes, 0.2) },
   { id: 'operator',      p: V(2.2, -14.3, 5.5),        l: V(0, -16.6, -5) },
   {                      p: V(9.5, -15, -13),          l: V(3, -26, -22) },
   { id: 'mind',          p: V(5, -24, -17),            l: V(0, -29, -26) },
@@ -107,7 +107,7 @@ export const ROUTE = [
   { id: 'scars',         p: V(41, -37.2, -34),         l: V(38.5, -37.5, -28) },
   { id: 'cost',          p: V(41, -36.8, -22),         l: V(44, -37, -16) },
   {                      p: V(41, -38.5, -6),          l: V(26, -48, 2) },
-  { id: 'inprogress',    p: V(32.5, -45, 8),           l: V(20, -49, 3) },
+  { id: 'twin',          p: V(32.5, -45, 8),           l: V(20, -49, 3) },
   { id: 'forge',         p: V(12, -45.5, 14.5),        l: V(21, -49, 2) },
   {                      p: V(19.6, -43.5, 4.4),       l: V(20, -20, 3.8) },
   {                      p: V(20.2, -12, 4.1),         l: V(20.2, 10, 3.8) },
@@ -181,24 +181,45 @@ export function buildWorld() {
     return o;
   }
 
-  // Eureka: five organs lit. The sixth seat, where Epiphany keeps Face, is the viewer's.
+  // Eureka: six faculties lit. The seat where Epiphany kept Face is the viewer's.
   chamber(OC, -19, 11, 11.5, 8, 7);
   const guide = new THREE.Line(lineGeo(circlePts(0.78 * R_EUREKA, 40)), ps1({ color: 0x1d5a5a, emissive: true }));
   guide.position.set(OC.x, -18.95, OC.z); scene.add(guide);
   place(O.self, up(OC, 0.4 + ORGAN_Y - OC.y), 'self', 1, -19);
   for (const id of ['imagination', 'hands', 'soul', 'life']) place(O[id], org[id], id, 1, -19);
+  place(O.eyes, org.eyes, 'eyes', 0.95, -19).group.lookAt(ROUTE.find(k => k.id === 'eyes').p); // the lens faces its stop
 
-  // Epiphany: all eight organs, in scaffolding.
+  // The vanishing twin: Epiphany's chamber after Eureka absorbed her. All eight cages stand, mostly empty.
+  // Eyes has already gone to Eureka (a thread marks the way it went); Body and Face rise out of their
+  // cages and drift toward Eureka's chamber as the page passes through.
   chamber(EC, -52, 14, 14.5, 10, 12);
   const toViewer = V(32.5 - EC.x, 0, 8 - EC.z).normalize();
+  const toEureka = V(OC.x - EC.x, 0, OC.z - EC.z).normalize();
   const eslots = {
     self: up(EC, 0.4), face: EC.clone().addScaledVector(toViewer, 0.58 * R_EPIPHANY),
     ...Object.fromEntries(['imagination', 'eyes', 'body', 'hands', 'soul', 'life'].map(id => [id, O.slot(EC, id, R_EPIPHANY)])),
   };
+  const cageH = (id) => id === 'self' ? 6.5 : 4.6;
   for (const [id, pos] of Object.entries(eslots)) {
-    place(O[id], pos, 'sisters', 1.3, -52);
-    const big = id === 'self', cage = O.scaffold(big ? 6.4 : 3.6, big ? 6.5 : 4.6);
+    const cage = O.scaffold(id === 'self' ? 6.4 : 3.6, cageH(id));
     cage.position.set(pos.x, -52, pos.z); scene.add(cage);
+  }
+  const threadMat = ps1({ color: 0x6f8aa0, emissive: true });
+  const thread = (a, b) => { const l = new THREE.Line(lineGeo([a, b]), threadMat); l.frustumCulled = false; scene.add(l); return l; };
+  { const e = eslots.eyes; thread(V(e.x, -52 + cageH('eyes'), e.z), V(e.x, -40.5, e.z).addScaledVector(toEureka, 4)); }
+  const leaving = { body: 0, face: 0.35 }; // Face set out later than Body
+  for (const [id, lag] of Object.entries(leaving)) {
+    const o = O[id](); o.group.scale.setScalar(1.3); scene.add(o.group);
+    const from = eslots[id].clone().setY(-52 + cageH(id) * 0.5), to = eslots[id].clone().addScaledVector(toEureka, 5).setY(-42);
+    const l = thread(V(from.x, -52 + cageH(id), from.z), from);
+    const phase = from.x * 1.7 + from.z;
+    anims.push((t, ctx) => {
+      const d = THREE.MathUtils.smoothstep((ctx.u - U.cost) / (U.forge - U.cost) - lag * 0.5, 0, 1);
+      o.group.position.lerpVectors(from, to, 0.2 + 0.7 * d).y += Math.sin(t * 0.9 + phase) * 0.15;
+      o.group.rotation.z = Math.sin(t * 0.4 + phase) * 0.15;
+      const p = l.geometry.attributes.position; p.setXYZ(1, o.group.position.x, o.group.position.y - 0.8, o.group.position.z); p.needsUpdate = true;
+      o.update(t, ctx.near('twin', 0.04));
+    });
   }
   {
     const tops = [];
@@ -284,7 +305,7 @@ export function buildWorld() {
   // One illustration: the mutation runner's four false greens (Eureka tools/, 2026-10-01), and an empty case.
   const CASES = [
     [9, 'north', 11, '#6a5a78', '#a795c3', 'No.01 BUILD TYPO', 'READ GREEN  SOUL CAUGHT'],
-    [15, 'south', 12, '#78604a', '#c3a587', 'No.02 FORGED KILL', 'READ GREEN  SOUL CAUGHT'],
+    [15, 'south', 12, '#78604a', '#c3a587', 'No.02 LABEL SPLIT', 'READ GREEN  SOUL CAUGHT'],
     [21, 'north', 13, '#4a7868', '#87c3ad', 'No.03 LEFTOVER FILE', 'READ GREEN  SOUL CAUGHT'],
     [27, 'south', 14, '#78784a', '#c3c387', 'No.04 RUNS ONCE', 'READ GREEN  SOUL CAUGHT'],
     [33, 'north', 0, null, null, 'No.05', 'EMPTY'],

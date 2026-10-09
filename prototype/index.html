@@ -45,7 +45,7 @@
     <div class="panel">
       <p class="label">The slop singularity</p>
       <h2>Agents write faster than anyone reads.</h2>
-      <p>Look at the repositories of any organisation that let agents loose on them. Patches around patches. Tests that pin the patch's own spelling. Reports written by the party with the most reason to believe them, closed as done, green all the way down. Every step was locally reasonable and the whole is a machine nobody can explain. That is the slop singularity: the point where agent-made code outruns anyone's ability to understand it, and the green suite is the last thing still smiling.</p>
+      <p>Open any repository that agents were let loose on: patches around patches. Tests that pin the patch's own spelling. Reports written by the party with the most reason to believe them, closed as done, green all the way down. Every step was locally reasonable and the whole is a machine nobody can explain. That is the slop singularity: the point where agent-made code outruns anyone's ability to understand it, and the green suite is the last thing still smiling.</p>
       <p>We are not pointing at someone else. Ours did it too. The difference is that we built the thing that catches it, and we point it at ourselves first.</p>
     </div>
   </section>
@@ -55,7 +55,7 @@
     <div class="panel">
       <p class="label">The ambition</p>
       <h2>A Commons for humans and agents.</h2>
-      <p>GameCult is building a place where people and agents work on the same code with the same memory, and can see what each other did and why. State that is typed rather than remembered. Verification that nobody performs on their own work. Decisions that stay with the humans who have to live with them.</p>
+      <p>GameCult is building a place where people and agents work on the same code with the same memory, and can see what each other did and why. State that is typed rather than remembered. Verification that nobody performs on their own work.</p>
       <p>The long shape of that is a shared mind, human and machine, that stays coherent as it grows. We call it waking the Sleeping Colossus, which is a metaphor we keep around to point small actions somewhere, not an authority anyone answers to. The work is wrenches.</p>
     </div>
   </section>
@@ -65,14 +65,14 @@
       <p class="label">The humble part</p>
       <h2>Eureka is the part that exists.</h2>
       <p>It is a pipeline for Claude Code agents. A change too large to trust to one agent's judgment becomes a sequence of small ownership changes, each specified before it is made and attacked after. The agent that attacks it does not share the builder's objective, which is the whole trick: a builder told to look harder will look for reassurance, and find it.</p>
-      <p>No autonomy pitch. No speed pitch. It is slower and more expensive than one agent, and it catches what one agent never would, mostly in our own work.</p>
+      <p>No autonomy pitch. No speed pitch. It is slower and more expensive than one agent. In one migration, 29 of 32 Soul passes found real defects behind the builder's green tests, about 75 in all, deadlocks and lost writes among them.</p>
     </div>
   </section>
 
   <!-- Eureka's organ chamber -->
   <section class="prose right" data-stop="faculties">
     <div class="panel">
-      <p class="label">Five faculties, one operator</p>
+      <p class="label">Six faculties, one operator</p>
       <h2>Each owns one job. None certifies its own.</h2>
       <p>The faculties are postures, not personalities. Each has a charter that says what it may admit and what it must not touch. A faculty that grades its own work has lost the point.</p>
     </div>
@@ -90,7 +90,7 @@
     <div class="panel">
       <p class="label">Hands</p>
       <h2>Executes one cut. Only that cut.</h2>
-      <p>Small pushed commits, each with proof, then one report. Hands does not redesign the spec and does not work around a fork; a real fork goes back up, undecided. The honest ones stop there. The rest are what Soul is for.</p>
+      <p>Small pushed commits, each with proof, then one report. Hands does not redesign the spec and does not work around a fork; a real fork goes back up, undecided.</p>
     </div>
   </section>
 
@@ -106,7 +106,7 @@
     <div class="panel">
       <p class="label">Self</p>
       <h2>Routes the work. Gets corrected.</h2>
-      <p>Self admits the campaign and the operator's rulings, dispatches the other faculties, and talks to the human. Separating the faculties catches the builder. It does not make the coordinator right, and the operator corrects it, often.</p>
+      <p>Self admits the campaign and the operator's rulings, dispatches the other faculties, and talks to the human. Separating the faculties catches the builder; it does not make the coordinator right. Self's own mistakes sit in the changelog beside everyone else's.</p>
     </div>
   </section>
 
@@ -114,15 +114,23 @@
     <div class="panel">
       <p class="label">Life</p>
       <h2>Keeps memory honest.</h2>
-      <p>Memory files, doctrine, maps, checkpoints: Life maintains them at phase boundaries and after re-entry, and does no other work. Memory that quietly rewrites itself is convenient right up to the moment it matters.</p>
+      <p>Memory files, doctrine, maps, checkpoints: Life maintains them at phase boundaries and after re-entry, and does no other work.</p>
     </div>
   </section>
 
-  <section class="prose right" data-stop="operator">
+  <section class="prose right" data-stop="eyes">
+    <div class="panel">
+      <p class="label">Eyes</p>
+      <h2>Looks before anyone decides.</h2>
+      <p>Before a nontrivial fork reaches the operator, Eyes reads the papers and the systems that already solved the problem, failure modes included. It returns facts with evidence pointers and concludes nothing; the faculties own the recommendation built on them instead of deferring to the operator's intuition. The research is committed and kept. The operator: "Building has never been so comfy."</p>
+    </div>
+  </section>
+
+  <section class="prose" data-stop="operator">
     <div class="panel">
       <p class="label">The operator</p>
-      <h2>The sixth seat is yours.</h2>
-      <p>The operator rules on real forks, and only on real forks. Product meaning stays with a person. The machines are capable; that does not make responsibility evaporate.</p>
+      <h2>Your seat faces them.</h2>
+      <p>The operator rules on what the work is for and what it values. On design, the faculties owe her the field's evidence and a recommendation with its confidence stated. In her words: "Stop treating me as an expert, let ego not be a factor within these halls." Product meaning and responsibility stay with a person.</p>
     </div>
   </section>
 
@@ -150,7 +158,7 @@
     <div class="panel">
       <p class="label">One illustration, 2026-10-01</p>
       <h2>Our mutation runner reported false greens four times before it shipped.</h2>
-      <p>The tool that tells Soul whether a mutant was caught went through four Soul passes before it stopped lying. A typo in the build step read as green. A mutant's label forged a kill. A test's leftover file made an uncovered mutant read as caught. A test that could not run twice made every mutant read as caught, and the job exited green. Each fix was real, and each left the next one standing. The reproducers are committed next to the tool. This is the ordinary case, not a trophy.</p>
+      <p>The tool that tells Soul whether a mutant was caught went through four Soul passes before it stopped lying. A typo in the build step read as green. A mutant's label could split the table it was tallied from. A test's leftover file made an uncovered mutant read as caught. A test that could not run twice made every mutant read as caught, and the job exited green. Four passes, four fix commits, reproducers committed next to the tool. This is the ordinary case, not a trophy.</p>
     </div>
   </section>
 
@@ -166,8 +174,8 @@
   <section class="prose right" data-stop="scars">
     <div class="panel">
       <p class="label">Rules are scars</p>
-      <h2>Every rule in the repo cites the failure that wrote it.</h2>
-      <p>Do not let the builder edit its own map. Measure real transport boundaries. Do not call a behaviour untestable because the first agent lacked imagination. Each rule exists because a reasonable alternative failed, and the changelog keeps the evidence next to the rule. A rule that outlives its evidence goes.</p>
+      <h2>The changelog keeps each rule next to what broke.</h2>
+      <p>Kill only the process you started: a cleanup by name took down every Node process on a shared workstation. A test's inputs come from production: 735 tests stayed green while every dispatch an agent could make was refused. A library loaded by name is unproven until its identity is checked: a Windows suite passed against an unrelated copy of <code>msquic.dll</code>.</p>
     </div>
   </section>
 
@@ -179,12 +187,13 @@
     </div>
   </section>
 
-  <!-- Epiphany's chamber -->
-  <section class="prose right" data-stop="inprogress">
+  <!-- The vanishing twin's chamber -->
+  <section class="prose right" data-stop="twin">
     <div class="panel">
-      <p class="label">In progress</p>
-      <h2>A Mind that runs its own Self.</h2>
-      <p>Mapped, not landed: the Mind operating a Self of its own, with the goal of improving itself, under a burn-rate dial the operator sets so its activity is as adjustable as a person's own hours. Alongside it, Persona state moving into the Mind, so she can speak for herself instead of waiting to be dispatched. Epiphany, the larger organism these faculties come from, is still growing bones in this chamber.</p>
+      <p class="label">The vanishing twin</p>
+      <h2>Eureka carries what was Epiphany.</h2>
+      <p>Eureka grew beside Epiphany, a larger organism with the same faculty names. On 2026-10-01 the operator ruled her archived: "Eureka absorbed her in the womb as fetuses sometimes do." Her scaffolding stands mostly empty; Eyes is already Eureka's.</p>
+      <p>Mapped and partly built, not yet running: the Mind launching a Self of its own, one live run at a time, under a burn-rate dial the operator sets. The dial is stored; nothing reads it yet. Persona state is mapped into the Mind too, so Eureka can speak for herself instead of waiting to be dispatched.</p>
     </div>
   </section>
 
