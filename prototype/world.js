@@ -1,6 +1,6 @@
 // The world the camera flies through, and the path it flies along.
 // Route: hall -> hatch + shaft -> Eureka's organ chamber -> lattice -> specimen gallery
-//        -> archive -> Epiphany's chamber -> second shaft -> back to the hall.
+//        -> archive -> the vanishing twin's chamber -> second shaft -> back to the hall.
 import * as THREE from 'three';
 import { C, ps1, rng, canvas, texOf, tex, noise, flat, tiles, merge, mat4, lineGeo, circlePts } from './ps1.js';
 import * as O from './organs.js';
@@ -71,18 +71,18 @@ function labelTex(a, b) {
 
 // ---------- the route: stops pin page sections; vias shape the flight between them ----------
 const OC = V(0, -17, -5);  // Eureka's organ chamber, Self at the centre
-const EC = V(20, -49, 4);  // Epiphany's chamber
+const EC = V(20, -49, 4);  // the vanishing twin: Epiphany's chamber
 const R_EUREKA = 6, R_EPIPHANY = 9, ORGAN_Y = -16.8;
 const orbit = (c, deg, r, y) => { const a = deg * Math.PI / 180; return V(c.x + Math.cos(a) * r, y, c.z - Math.sin(a) * r); };
-const org = Object.fromEntries(['imagination', 'hands', 'soul', 'life'].map(id => [id, O.slot(OC, id, R_EUREKA).setY(ORGAN_Y)]));
+const org = Object.fromEntries(['imagination', 'hands', 'soul', 'life', 'eyes'].map(id => [id, O.slot(OC, id, R_EUREKA).setY(ORGAN_Y)]));
 const up = (v, d = 0.3) => v.clone().setY(v.y + d);
 
 export const ROUTE = [
   { id: 'hero',          p: V(5.5, 4, 13),             l: V(-2.8, 2.5, 0) },
-  { id: 'reassuring',    p: V(3.2, 2.4, 8.8),          l: V(0, 0.6, 4) },
-  { id: 'green',         p: V(-0.4, 4.2, 4.9),         l: V(-0.4, -6, 3.7) },
-  { id: 'epiphany',      p: V(-0.4, -3, 4.1),          l: V(-0.3, -13, 3.4) },
-  { id: 'sister',        p: V(-0.4, -9, 4.0),          l: V(-0.2, -18, 3.0) },
+  { id: 'lines',         p: V(3.2, 2.4, 8.8),          l: V(0, 0.6, 4) },
+  { id: 'slop',          p: V(-0.4, 4.2, 4.9),         l: V(-0.4, -6, 3.7) },
+  { id: 'commons',       p: V(-0.4, -3, 4.1),          l: V(-0.3, -13, 3.4) },
+  { id: 'method',        p: V(-0.4, -9, 4.0),          l: V(-0.2, -18, 3.0) },
   { id: 'faculties',     p: V(-0.3, -12.4, 4.4),       l: V(0, -17.5, -4) },
   {                      p: orbit(OC, 200, 8.2, -15.5), l: V(-2, -16.8, -6) },
   { id: 'imagination',   p: orbit(OC, 135, 7.8, -15.8), l: up(org.imagination) },
@@ -90,25 +90,25 @@ export const ROUTE = [
   { id: 'hands',         p: orbit(OC, 250, 7.5, -15.6), l: org.hands },
   { id: 'soul',          p: orbit(OC, 330, 7.5, -15.6), l: org.soul },
   { id: 'self',          p: orbit(OC, 20, 3.3, -14.6),  l: up(OC, 0.2) },
-  { id: 'life',          p: orbit(OC, 80, 7, -15.8),    l: org.life },
-  {                      p: orbit(OC, 15, 8.6, -15),    l: OC.clone() },
+  { id: 'life',          p: orbit(OC, 98, 7.2, -15.6),  l: org.life },
+  { id: 'eyes',          p: orbit(OC, 46, 10.2, -15.4), l: up(org.eyes, 0.2) },
   { id: 'operator',      p: V(2.2, -14.3, 5.5),        l: V(0, -16.6, -5) },
   {                      p: V(9.5, -15, -13),          l: V(3, -26, -22) },
-  { id: 'prompts',       p: V(5, -24, -17),            l: V(0, -29, -26) },
+  { id: 'mind',          p: V(5, -24, -17),            l: V(0, -29, -26) },
   { id: 'mutation',      p: V(-4, -29.5, -23.5),       l: V(1, -32, -31) },
   {                      p: V(0, -35, -33),            l: V(-4, -37, -44) },
-  { id: 'campaign',      p: V(3, -37, -45),            l: V(-3.4, -37.4, -45) },
-  { id: 'case-drop',     p: V(9.4, -37.6, -44.2),      l: V(9, -38.3, -48.4) },
-  { id: 'case-uaf',      p: V(15.4, -37.6, -45.8),     l: V(15, -38.3, -41.6) },
-  { id: 'case-leak',     p: V(21.4, -37.6, -44.2),     l: V(21, -38.3, -48.4) },
-  { id: 'case-int',      p: V(27.4, -37.6, -45.8),     l: V(27, -38.3, -41.6) },
-  { id: 'case-exec',     p: V(33.4, -37.6, -44.2),     l: V(33, -38.3, -48.4) },
+  { id: 'falsegreens',   p: V(3, -37, -45),            l: V(-3.4, -37.4, -45) },
+  {                      p: V(9.4, -37.6, -44.2),      l: V(9, -38.3, -48.4) },
+  {                      p: V(15.4, -37.6, -45.8),     l: V(15, -38.3, -41.6) },
+  {                      p: V(21.4, -37.6, -44.2),     l: V(21, -38.3, -48.4) },
+  {                      p: V(27.4, -37.6, -45.8),     l: V(27, -38.3, -41.6) },
+  {                      p: V(33.4, -37.6, -44.2),     l: V(33, -38.3, -48.4) },
   { id: 'pattern',       p: V(37, -37, -45),           l: V(41, -37.5, -38) },
-  { id: 'bodycount',     p: V(41, -37.2, -34),         l: V(38.5, -37.5, -28) },
-  { id: 'expense',       p: V(41, -36.8, -22),         l: V(44, -37, -16) },
+  { id: 'scars',         p: V(41, -37.2, -34),         l: V(38.5, -37.5, -28) },
+  { id: 'cost',          p: V(41, -36.8, -22),         l: V(44, -37, -16) },
   {                      p: V(41, -38.5, -6),          l: V(26, -48, 2) },
-  { id: 'sisters',       p: V(32.5, -45, 8),           l: V(20, -49, 3) },
-  { id: 'open',          p: V(12, -45.5, 14.5),        l: V(21, -49, 2) },
+  { id: 'twin',          p: V(32.5, -45, 8),           l: V(20, -49, 3) },
+  { id: 'forge',         p: V(12, -45.5, 14.5),        l: V(21, -49, 2) },
   {                      p: V(19.6, -43.5, 4.4),       l: V(20, -20, 3.8) },
   {                      p: V(20.2, -12, 4.1),         l: V(20.2, 10, 3.8) },
   {                      p: V(20.3, 1.5, 4.2),         l: V(12, 2.5, 1) },
@@ -181,24 +181,45 @@ export function buildWorld() {
     return o;
   }
 
-  // Eureka: five organs lit. The sixth seat, where Epiphany keeps Face, is the viewer's.
+  // Eureka: six faculties lit. The seat where Epiphany kept Face is the viewer's.
   chamber(OC, -19, 11, 11.5, 8, 7);
   const guide = new THREE.Line(lineGeo(circlePts(0.78 * R_EUREKA, 40)), ps1({ color: 0x1d5a5a, emissive: true }));
   guide.position.set(OC.x, -18.95, OC.z); scene.add(guide);
   place(O.self, up(OC, 0.4 + ORGAN_Y - OC.y), 'self', 1, -19);
   for (const id of ['imagination', 'hands', 'soul', 'life']) place(O[id], org[id], id, 1, -19);
+  place(O.eyes, org.eyes, 'eyes', 0.95, -19).group.lookAt(ROUTE.find(k => k.id === 'eyes').p); // the lens faces its stop
 
-  // Epiphany: all eight organs, in scaffolding.
+  // The vanishing twin: Epiphany's chamber after Eureka absorbed her. All eight cages stand, mostly empty.
+  // Eyes has already gone to Eureka (a thread marks the way it went); Body and Face rise out of their
+  // cages and drift toward Eureka's chamber as the page passes through.
   chamber(EC, -52, 14, 14.5, 10, 12);
   const toViewer = V(32.5 - EC.x, 0, 8 - EC.z).normalize();
+  const toEureka = V(OC.x - EC.x, 0, OC.z - EC.z).normalize();
   const eslots = {
     self: up(EC, 0.4), face: EC.clone().addScaledVector(toViewer, 0.58 * R_EPIPHANY),
     ...Object.fromEntries(['imagination', 'eyes', 'body', 'hands', 'soul', 'life'].map(id => [id, O.slot(EC, id, R_EPIPHANY)])),
   };
+  const cageH = (id) => id === 'self' ? 6.5 : 4.6;
   for (const [id, pos] of Object.entries(eslots)) {
-    place(O[id], pos, 'sisters', 1.3, -52);
-    const big = id === 'self', cage = O.scaffold(big ? 6.4 : 3.6, big ? 6.5 : 4.6);
+    const cage = O.scaffold(id === 'self' ? 6.4 : 3.6, cageH(id));
     cage.position.set(pos.x, -52, pos.z); scene.add(cage);
+  }
+  const threadMat = ps1({ color: 0x6f8aa0, emissive: true });
+  const thread = (a, b) => { const l = new THREE.Line(lineGeo([a, b]), threadMat); l.frustumCulled = false; scene.add(l); return l; };
+  { const e = eslots.eyes; thread(V(e.x, -52 + cageH('eyes'), e.z), V(e.x, -40.5, e.z).addScaledVector(toEureka, 4)); }
+  const leaving = { body: 0, face: 0.35 }; // Face set out later than Body
+  for (const [id, lag] of Object.entries(leaving)) {
+    const o = O[id](); o.group.scale.setScalar(1.3); scene.add(o.group);
+    const from = eslots[id].clone().setY(-52 + cageH(id) * 0.5), to = eslots[id].clone().addScaledVector(toEureka, 5).setY(-42);
+    const l = thread(V(from.x, -52 + cageH(id), from.z), from);
+    const phase = from.x * 1.7 + from.z;
+    anims.push((t, ctx) => {
+      const d = THREE.MathUtils.smoothstep((ctx.u - U.cost) / (U.forge - U.cost) - lag * 0.5, 0, 1);
+      o.group.position.lerpVectors(from, to, 0.2 + 0.7 * d).y += Math.sin(t * 0.9 + phase) * 0.15;
+      o.group.rotation.z = Math.sin(t * 0.4 + phase) * 0.15;
+      const p = l.geometry.attributes.position; p.setXYZ(1, o.group.position.x, o.group.position.y - 0.8, o.group.position.z); p.needsUpdate = true;
+      o.update(t, ctx.near('twin', 0.04));
+    });
   }
   {
     const tops = [];
@@ -244,7 +265,7 @@ export function buildWorld() {
       return { m, tip, len: 8 + r() * 7 };
     });
     anims.push((t, ctx) => {
-      const k = THREE.MathUtils.clamp((ctx.u - U.prompts) / (U.mutation - U.prompts), 0, 1);
+      const k = THREE.MathUtils.clamp((ctx.u - U.mind) / (U.mutation - U.mind), 0, 1);
       probes.forEach(p => {
         p.m.scale.y = Math.max(0.001, k * p.len);
         p.tip.position.set(p.m.position.x, p.m.position.y - k * p.len, p.m.position.z); p.tip.rotation.y = t;
@@ -263,7 +284,7 @@ export function buildWorld() {
   wallG(44, 16, -50, 0);
   wallG(32, 22, -40, Math.PI); // the south wall leaves an opening where the camera drops in from the lattice
   {
-    // The first campaign's cabinet: twelve pinned mutants, one still moving.
+    // A cabinet of pinned mutants, one still moving.
     const cab = new THREE.Group(); cab.position.set(-3.4, -37.4, -45); cab.rotation.y = Math.PI / 2; cab.scale.setScalar(0.52); scene.add(cab);
     const frame = new THREE.Mesh(new THREE.BoxGeometry(7.4, 9.4, 0.6, 3, 4, 1), ps1({ map: T.cabinet })); frame.position.z = -0.4; cab.add(frame);
     const bug = bugTex(1, '#5d6b78', '#8795a3'), bugMat = ps1({ map: bug, alphaTest: true, emissive: true, color: 0xcfd8e2 });
@@ -281,23 +302,27 @@ export function buildWorld() {
   }
   const glass = ps1({ color: 0x9fc4e8, rim: 0xbfe3ff, alpha: 0.22, side: THREE.DoubleSide });
   const brass = ps1({ color: 0xb08a4a, emissive: true });
+  // One illustration: the mutation runner's four false greens (Eureka tools/, 2026-10-01), and an empty case.
   const CASES = [
-    ['case-drop', 9, 'north', 11, '#6a5a78', '#a795c3', 'No.01 HANDSHAKE EVICTION', 'SUITE GREEN  SOUL CAUGHT'],
-    ['case-uaf', 15, 'south', 12, '#78604a', '#c3a587', 'No.02 USE AFTER FREE', 'SUITE GREEN  SOUL CAUGHT'],
-    ['case-leak', 21, 'north', 13, '#4a7868', '#87c3ad', 'No.03 53 BYTES A CALL', 'SUITE GREEN  SOUL CAUGHT'],
-    ['case-int', 27, 'south', 14, '#78784a', '#c3c387', 'No.04 FRACTION IN INT', 'SUITE GREEN  SOUL CAUGHT'],
-    ['case-exec', 33, 'north', 15, '#4a5a78', '#8799c3', 'No.05 SHARED SLOT', 'SUITE GREEN  SOUL CAUGHT'],
+    [9, 'north', 11, '#6a5a78', '#a795c3', 'No.01 BUILD TYPO', 'READ GREEN  SOUL CAUGHT'],
+    [15, 'south', 12, '#78604a', '#c3a587', 'No.02 LABEL SPLIT', 'READ GREEN  SOUL CAUGHT'],
+    [21, 'north', 13, '#4a7868', '#87c3ad', 'No.03 LEFTOVER FILE', 'READ GREEN  SOUL CAUGHT'],
+    [27, 'south', 14, '#78784a', '#c3c387', 'No.04 RUNS ONCE', 'READ GREEN  SOUL CAUGHT'],
+    [33, 'north', 0, null, null, 'No.05', 'EMPTY'],
   ];
-  for (const [id, x, side, seed, body, leg, l1, l2] of CASES) {
+  for (const [x, side, seed, body, leg, l1, l2] of CASES) {
     const g = new THREE.Group(); g.position.set(x, -40, side === 'north' ? -48.4 : -41.6); g.rotation.y = side === 'north' ? 0 : Math.PI; scene.add(g);
     const ped = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.0, 1.6), stone); ped.position.y = 0.5; g.add(ped);
     const box = new THREE.BoxGeometry(1.5, 1.6, 1.5);
     const gl = new THREE.Mesh(box, glass); gl.position.y = 1.8; g.add(gl);
     const fr = new THREE.LineSegments(new THREE.EdgesGeometry(box), brass); fr.position.y = 1.8; g.add(fr);
-    const spec = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.2), ps1({ map: bugTex(seed, body, leg), alphaTest: true, emissive: true, color: 0xdde6ee }));
-    spec.position.y = 1.8; g.add(spec);
+    if (body) {
+      const spec = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.2), ps1({ map: bugTex(seed, body, leg), alphaTest: true, emissive: true, color: 0xdde6ee }));
+      spec.position.y = 1.8; g.add(spec);
+      const phase = x;
+      anims.push((t) => { spec.rotation.y = Math.sin(t * 0.7 + phase) * 0.25; });
+    }
     const lab = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 0.26), ps1({ map: labelTex(l1, l2), emissive: true })); lab.position.set(0, 0.7, 0.81); g.add(lab);
-    anims.push((t, ctx) => { spec.rotation.y = Math.sin(t * 0.7) * 0.25 * ctx.near(id); });
   }
 
   // ---------- the archive: rules as tablets, each with a body count ----------

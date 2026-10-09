@@ -65,6 +65,24 @@ carries more operator intent, though the copy itself is a draft to workshop.
   takes on continuity, pressure and resuming after interruption, as it already
   does in Epiphany. Epiphany's own naming is Epiphany's to change.
 
+## Operator rulings (2026-10-09). These supersede the route's ending above.
+
+- **The last chamber is the vanishing twin, not a sister reveal.** Epiphany is
+  archived (Eureka mind ruling `eureka-substrate:ruling:operator-archive-epiphany`,
+  2026-10-01: "Eureka absorbed her in the womb as fetuses sometimes do"). Keep
+  Epiphany's chamber and its organ models, recast: the scaffolding stands mostly
+  empty and her organs drift into Eureka's orbit. The lineage stays; the
+  "sister" framing above is superseded. The chamber's name is the vanishing twin
+  (operator, 2026-10-09: "I believe you called it a vanishing twin. Much more
+  poetic"): the twin absorbed before birth, whose cells the survivor carries.
+- **Eyes is a full faculty.** Eyes joins Eureka's chamber at full detail, with
+  its own copy: evidence before every fork, advice owned instead of deference to
+  the operator, research always kept. The faculty copy counts six, not five.
+  Operator, 2026-10-09: "Eyes turned out to be one of the more valuable agents
+  in Eureka after the recent doctrine change. Building has never been so comfy."
+- The copy is fact-checked against the live system before it ships; the audit is
+  `docs/research/landing-claims-audit-2026-10-09.md`.
+
 ---
 
 This was written 2026-09-24 by the Self agent that has been running Eureka on a
