@@ -207,7 +207,88 @@ export function life() {
   };
 }
 
-// ---------- Epiphany-only organs (Face, Eyes, Body): lower detail, they live in her chamber ----------
+// Eyes: evidence astrolabe. A black-glass lens on its +z axis, held in blue-metal gimbals,
+// behind six spiral aperture petals; a proof lattice of meridians and latitudes over the lens
+// hemisphere, a pale scan arc, and cyan evidence sparks that appear only as evidence arrives (k).
+// Unknowns widen the aperture; confidence narrows and steadies it.
+export function eyes() {
+  const group = new THREE.Group();
+  const lensGeo = lathe([[0, 0.34], [0.3, 0.3], [0.55, 0.18], [0.7, 0], [0.55, -0.18], [0.3, -0.3], [0, -0.34]], 12);
+  lensGeo.rotateX(Math.PI / 2);
+  const lens = new THREE.Mesh(lensGeo, ps1({ color: 0x07090c, rim: 0x5ff2ff }));
+  const caustic = new THREE.Mesh(new THREE.TorusGeometry(0.71, 0.035, 3, 20), ps1({ color: 0x5ff2ff, emissive: true }));
+  const metal = ps1({ color: 0x4a6a8f, rim: 0x9fc8ff });
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.86, 0.09, 4, 20), metal);
+  group.add(lens, caustic, ring);
+  const ticks = [];
+  for (let i = 0; i < 12; i++) { // graduations on the aperture ring
+    const a = i / 12 * Math.PI * 2, r = 0.86, l = i % 3 ? 0.08 : 0.16;
+    ticks.push(V(Math.cos(a) * r, Math.sin(a) * r, 0.1), V(Math.cos(a) * (r + l), Math.sin(a) * (r + l), 0.1));
+  }
+  ring.add(segs(ticks, 0xcfe2f0));
+
+  // Aperture petals: log-spiral shutters pivoting on the rim, in the lens's tangent disk.
+  const petalMat = ps1({ color: 0x3a5576, rim: 0x9fc8ff, side: THREE.DoubleSide });
+  const petals = [...Array(6)].map((_, i) => {
+    const a0 = i / 6 * Math.PI * 2, pivot = V(Math.cos(a0) * 0.8, Math.sin(a0) * 0.8, 0.36);
+    const pos = [], idx = [], N = 6;
+    for (let k = 0; k <= N; k++) {
+      const s = k / N, rho = 0.8 * Math.exp(-1.3 * s), th = a0 + 1.2 * s, w = 0.17 * (1 - 0.7 * s) + 0.02;
+      const c = V(Math.cos(th) * rho, Math.sin(th) * rho, 0), side = V(Math.cos(th), Math.sin(th), 0);
+      const pa = c.clone().addScaledVector(side, w).sub(pivot), pb = c.clone().addScaledVector(side, -w).sub(pivot);
+      pos.push(pa.x, pa.y, 0, pb.x, pb.y, 0);
+      if (k < N) { const b = k * 2; idx.push(b, b + 1, b + 2, b + 1, b + 3, b + 2); }
+    }
+    const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); geo.setIndex(idx); geo.computeVertexNormals();
+    const holder = new THREE.Group(); holder.position.copy(pivot); holder.add(new THREE.Mesh(geo, petalMat)); group.add(holder);
+    // Opening swings the inner tip away from the axis; pick the rotation sign that does that.
+    const tip = V((pos[N * 6] + pos[N * 6 + 3]) / 2, (pos[N * 6 + 1] + pos[N * 6 + 4]) / 2, 0);
+    const out = (sgn) => tip.clone().applyAxisAngle(V(0, 0, 1), sgn * 0.3).add(pivot).setZ(0).length();
+    holder.userData.sign = out(1) > out(-1) ? 1 : -1;
+    return holder;
+  });
+
+  // Proof lattice: constraint lines over the lens hemisphere (meridians through the axis, two latitudes).
+  const lattice = new THREE.Group(); group.add(lattice);
+  const R = 1.0, arc = (f) => [...Array(13)].map((_, j) => f(j / 12 * Math.PI / 2));
+  for (let m = 0; m < 3; m++) {
+    const phi = m / 3 * Math.PI;
+    for (const sgn of [1, -1]) lattice.add(lines(arc(th => V(Math.cos(phi) * Math.sin(th) * R * sgn, Math.sin(phi) * Math.sin(th) * R * sgn, Math.cos(th) * R)), 0xcfe2f0));
+  }
+  for (const th of [0.6, 1.15]) {
+    const lat = lines(circlePts(Math.sin(th) * R, 18), 0xa8c4dc); lat.rotation.x = Math.PI / 2; lat.position.z = Math.cos(th) * R; lattice.add(lat);
+  }
+
+  // Gimbals: the astrolabe's outer rings.
+  const gimbals = [1.16, 1.3].map((r, i) => {
+    const g = new THREE.Mesh(new THREE.TorusGeometry(r, 0.035, 3, 24), metal);
+    g.rotation.set(i ? 0 : Math.PI / 2, i ? Math.PI / 2 : 0, 0); group.add(g); return g;
+  });
+
+  // Scan arc: a pale third of a circle sweeping the tangent disk, masked by the aperture.
+  const scan = lines([...Array(9)].map((_, j) => { const a = j / 8 * Math.PI * 0.66; return V(Math.cos(a) * 0.5, Math.sin(a) * 0.5, 0.4); }), 0xe8f6ff);
+  group.add(scan);
+
+  // Evidence sparks, snapped to fixed source directions on the hemisphere. No evidence, no sparks.
+  const sparks = [[0.5, 0.3], [1.9, 0.8], [3.0, 0.45], [4.2, 1.0], [5.1, 0.65], [0.9, 1.2], [3.6, 1.25]].map(([phi, th]) => {
+    const s = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 0.08), ps1({ color: 0x6ff7ff, emissive: true }));
+    s.position.set(Math.cos(phi) * Math.sin(th) * R, Math.sin(phi) * Math.sin(th) * R, Math.cos(th) * R); group.add(s); return s;
+  });
+  return {
+    group,
+    update(t, k) {
+      const open = 0.95 - 0.55 * k + (1 - k) * 0.08 * Math.sin(t * 5.3);
+      petals.forEach(p => { p.rotation.z = p.userData.sign * 1.1 * open; });
+      lattice.rotation.z = t * 0.12;
+      gimbals[0].rotation.y = t * 0.3; gimbals[1].rotation.x = t * 0.21;
+      ring.rotation.z = -t * 0.08;
+      scan.rotation.z = t * 1.4; scan.scale.setScalar(0.5 + 0.7 * open);
+      sparks.forEach((s, i) => { s.visible = k > (i + 1) / 9; s.rotation.y = t * 2; });
+    },
+  };
+}
+
+// ---------- organs only Epiphany had (Face, Body): lower detail, they drift in her chamber ----------
 
 // Face: speech lantern. Translucent bell, warm throat, pearls around the lip.
 export function face() {
@@ -217,19 +298,6 @@ export function face() {
   throat.rotation.x = Math.PI / 2; throat.position.y = -0.1; group.add(throat);
   const pearls = [...Array(5)].map(() => { const p = new THREE.Mesh(new THREE.OctahedronGeometry(0.08, 0), ps1({ color: 0xfff2dc, emissive: true })); group.add(p); return p; });
   return { group, update(t) { pearls.forEach((p, i) => { const a = t * 0.6 + i * 1.26, r = 0.9 + 0.25 * Math.sin(t + i); p.position.set(Math.cos(a) * r, -0.4 + 0.1 * Math.sin(t * 2 + i), Math.sin(a) * r); }); } };
-}
-
-// Eyes: evidence astrolabe. Black glass lens, blue-metal aperture ring, proof meridians, cyan sparks.
-export function eyes() {
-  const group = new THREE.Group();
-  const lens = new THREE.Mesh(new THREE.SphereGeometry(0.7, 8, 6), ps1({ color: 0x07090c, rim: 0x5ff2ff })); lens.scale.z = 0.45; group.add(lens);
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.82, 0.09, 4, 16), ps1({ color: 0x4a6a8f, rim: 0x9fc8ff })); group.add(ring);
-  const meridians = [0, 1].map(i => { const m = lines(circlePts(0.98, 20), 0xcfe2f0); m.rotation.x = Math.PI / 2 * i; group.add(m); return m; });
-  for (let i = 0; i < 5; i++) {
-    const s = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.07, 0.07), ps1({ color: 0x6ff7ff, emissive: true }));
-    const a = i * 1.3; s.position.set(Math.cos(a) * 0.5, Math.sin(a) * 0.5, 0.3); group.add(s);
-  }
-  return { group, update(t) { meridians.forEach((m, i) => { m.rotation.y = t * (0.3 + i * 0.2); }); ring.rotation.z = t * 0.1; } };
 }
 
 // Body: load-bearing graph stone. Soft geode mass, enamel stress ribs, checkpoint pearls.
@@ -247,7 +315,7 @@ export function body() {
   return { group, update(t) { stone.scale.y = 0.72 + Math.sin(t * 0.9) * 0.02; group.rotation.y = t * 0.05; } };
 }
 
-// Scaffolding: Epiphany is still growing bones.
+// Scaffolding: what stands of Epiphany after Eureka absorbed her.
 export function scaffold(w, h) {
   const x = w / 2, pts = [];
   const c = [V(-x, 0, -x), V(x, 0, -x), V(x, 0, x), V(-x, 0, x)];
