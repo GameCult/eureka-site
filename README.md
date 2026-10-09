@@ -41,7 +41,8 @@ hatch, the route runs:
 2. Through a lattice where Soul's probes flip green nodes to orange.
 3. Along a gallery of specimen cases: the mutation runner's four false greens, and one empty case.
 4. Past an archive where the rules keep their evidence.
-5. Into Epiphany's chamber.
+5. Into the vanishing twin's chamber, where Epiphany's scaffolding stands mostly
+   empty.
 6. Up a second shaft into the hall, where the monument has now split along its
    crack.
 
@@ -75,7 +76,8 @@ and every mesh is built in code.
 
 ## The organs
 
-Eureka's faculties come from Epiphany, the larger system it is the sister of.
+Eureka's faculties come from Epiphany, the larger system it grew beside and
+then absorbed.
 [Aquarium](https://github.com/GameCult/Aquarium/blob/main/docs/epiphany-agent-sdf-visual-language.md)
 already defines how each organ looks, as raymarched distance fields with PBR
 materials. We demade them:
@@ -86,13 +88,17 @@ materials. We demade them:
 - **Hands** is a dark tool with three enamel jaws and a hot cutting edge.
 - **Imagination** is an opal seed wrapped in curling ribbon petals.
 - **Life** is a teal nautilus shell carrying an ember and memory beads.
+- **Eyes** is a black-glass lens in blue-metal gimbals, behind spiral aperture
+  petals that narrow as evidence arrives, with cyan evidence sparks.
 
 They sit on Aquarium's own orbit slots, so the camera's circuit around the
-chamber is the Aquarium layout. The sixth seat, where Epiphany keeps her Face,
-belongs to the viewer: in Eureka, the operator is a human.
+chamber is the Aquarium layout. The seat where Epiphany kept her Face belongs
+to the viewer: in Eureka, the operator is a human.
 
-Epiphany's chamber has all eight organs, Face, Eyes and Body included, each in
-scaffolding. She is still growing bones.
+Epiphany's chamber is the vanishing twin: the twin absorbed before birth, whose
+cells the survivor carries. All eight cages still stand, mostly empty. Eyes has
+already gone to Eureka; Body and Face rise out of their cages and drift toward
+her as you pass.
 
 ## The thing at the far plane
 
@@ -156,7 +162,7 @@ If you make something with them, we'd love to see it.
 | --- | --- |
 | `prototype/index.html` | The copy. Each `<section data-stop>` pins a camera stop. |
 | `prototype/world.js` | The scene, the aperture, and `ROUTE`. |
-| `prototype/organs.js` | The organ demakes and Epiphany's scaffolding. |
+| `prototype/organs.js` | The organ demakes and the twin's scaffolding. |
 | `prototype/ps1.js` | The PS1 material, the framebuffer and dither, and geometry helpers. |
 | `prototype/main.js` | The scroll timeline and the frame loop. |
 | `prototype/vendor/` | three.js 0.186.1 (MIT). |
