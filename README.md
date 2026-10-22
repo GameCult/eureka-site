@@ -7,6 +7,18 @@ PlayStation 1 game you scroll through.
 
 Served at **https://eureka.gamecult.org/**.
 
+## Front Door
+
+- **Value:** the landing page for [Eureka](https://eureka.gamecult.org/forge/GameCult/Eureka), a scroll-driven WebGL dungeon rendered as a PlayStation 1 game, plus MIT-licensed parts you can lift: a PS1 material and dither pass for three.js, a scroll-on-rails camera pattern, and self-contained organ builders.
+- **Problem:** explain a code-review workflow (the agent that writes the code does not certify it) as something you travel through rather than read about.
+- **Entry points:**
+  - `prototype/index.html`: the copy; each `<section data-stop>` pins one camera stop.
+  - `prototype/ps1.js`: the reusable PS1 kit (`ps1()` material, `framebuffer()`); `prototype/organs.js`: the organ builders; `prototype/world.js`: the scene and `ROUTE`; `prototype/main.js`: the scroll timeline.
+  - Run locally: `python -m http.server 8765 --directory prototype`.
+  - `BRIEF.md` and `gpt6-copy.md`: the two source briefs; `docs/research/landing-claims-audit-2026-10-09.md`: copy claims labelled CURRENT, STALE or UNVERIFIED against the doctrine.
+- **Live:** the page served at https://eureka.gamecult.org/ from `prototype/`; deployment is in `gamecult-ops` at `runbooks/eureka-prototype-yggdrasil.md`.
+- **Planned:** nothing recorded in this repo beyond refreshing copy flagged STALE or UNVERIFIED in the audit.
+
 ## Two briefs, neither in charge
 
 We started with two documents, and both are in this repo.
